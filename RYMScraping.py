@@ -5,7 +5,6 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime as dt
 
-
 directory = 'C:/Users/trevor.krause/Documents/Projects/RYMGenres/'
 
 album_data = pd.DataFrame()
@@ -18,11 +17,12 @@ for filename in os.listdir(directory):
         soup = BeautifulSoup(open(os.path.join(directory, filename), encoding='utf-8'), "html.parser")
 
         # Get Album Info
-        temp_df = pd.DataFrame(columns=['artist', 'album', 'release_date', 'score'],
+        temp_df = pd.DataFrame(columns=['artist', 'album', 'release_date', 'score', 'num_ratings'],
                                data=[[soup.find(class_='artist').get_text(),
                                       (soup.find(class_='album_title').contents[0]).rstrip(),
                                       dt.strptime(soup.find(class_='issue_year ymd').get('title').strip(), '%d %B %Y'),
-                                      soup.find(class_='avg_rating').get_text().strip()
+                                      soup.find(class_='avg_rating').get_text().strip(),
+                                      int(soup.find(itemprop='ratingCount').get('content'))
                                       ]])
 
         # Get Genres
