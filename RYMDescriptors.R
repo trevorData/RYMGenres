@@ -2,6 +2,7 @@ setwd("~/Projects/RYMGenres")
 
 library(dplyr)
 library(tm)
+library(dendextend)
 
 raw.data <- read.csv("data.csv", encoding = 'UTF-8')
 data <- raw.data %>% subset(select=-c(release_date, score, num_ratings))
@@ -54,18 +55,15 @@ final.count <- all.count[-1] %>% aggregate(by=list(all.count$Group.1), FUN=sum)
 final <- final.genres
 final[-1] <- final[-1]/final.count[-1]
 
+# set rownames
+final_index <- final
+rownames(final_index) <- final_index$Group.1
+final_index <- final_index[-1]
+
 # create clusters
+dend <- as.dendrogram(hclust(dist(final_index, method = 'euclidean'), method = 'ward.D'))
 
 # visualize dendrogram
+dend %>% set('branches_k_color', k=5) %>% plot(horiz=T, xlab='Distance')
 
-
-
-
-
-
-
-
-
-
-
-
+(dend %>% cut(h=9))$lower[[1]] %>% set('branches_k_color', value=c('red', 'red3', 'rosybrown1', 'red4', 'salmon'), k=5) %>% plot(horiz=F)
