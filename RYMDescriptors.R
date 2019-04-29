@@ -24,32 +24,13 @@ genre1.count <- data.encoded[-(1:9)] %>% aggregate(by=list(data.encoded$genre1),
 genre2.group <- data.encoded[data.encoded$genre2!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$genre2 != "",]$genre2), FUN=sum)
 genre2.count <- data.encoded[data.encoded$genre2!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$genre2!="",]$genre2), FUN=NROW)
 
+# create grouped df with count of descriptors for genre3
 genre3.group <- data.encoded[data.encoded$genre3!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$genre3 != "",]$genre3), FUN=sum)
 genre3.count <- data.encoded[data.encoded$genre3!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$genre3!="",]$genre3), FUN=NROW)
 
-# create grouped df with count of descriptors for secgenre1
-secgenre1.group <- data.encoded[data.encoded$sec_genre1!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre1 != "",]$sec_genre1), FUN=sum)
-secgenre1.group[-1] <- secgenre1.group[-1] * .5
-secgenre1.count <- data.encoded[data.encoded$sec_genre1!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre1 != "",]$sec_genre1), FUN=NROW)
-
-# create grouped df with count of descriptors for secgenre2
-secgenre2.group <- data.encoded[data.encoded$sec_genre2!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre2 != "",]$sec_genre2), FUN=sum)
-secgenre2.group[-1] <- secgenre2.group[-1] * .5
-secgenre2.count <- data.encoded[data.encoded$sec_genre2!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre2 != "",]$sec_genre2), FUN=NROW)
-
-# create grouped df with count of descriptors for secgenre3
-secgenre3.group <- data.encoded[data.encoded$sec_genre3!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre3 != "",]$sec_genre3), FUN=sum)
-secgenre3.group[-1] <- secgenre3.group[-1] * .5
-secgenre3.count <- data.encoded[data.encoded$sec_genre3!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre3 != "",]$sec_genre3), FUN=NROW)
-
-# create grouped df with count of descriptors for secgenre4
-secgenre4.group <- data.encoded[data.encoded$sec_genre4!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre4 != "",]$sec_genre4), FUN=sum)
-secgenre4.group[-1] <- secgenre4.group[-1] * .5
-secgenre4.count <- data.encoded[data.encoded$sec_genre4!="",][-(1:9)] %>% aggregate(by=list(data.encoded[data.encoded$sec_genre4 != "",]$sec_genre4), FUN=NROW)
-
-# append all the grouped dfs together into one big grouped df, take only .5 of the count from the subgenre dfs
-all.genres <- do.call("rbind", list(genre1.group, genre2.group, genre3.count, secgenre1.group, secgenre2.group, secgenre3.group, secgenre4.group))
-all.count <- do.call('rbind', list(genre1.count, genre2.count, genre3.count, secgenre1.count, secgenre2.count, secgenre3.count, secgenre4.count))
+# append all the grouped dfs together into one big grouped df
+all.genres <- do.call("rbind", list(genre1.group, genre2.group, genre3.group))
+all.count <- do.call('rbind', list(genre1.count, genre2.count, genre3.count))
 
 final.genres <- all.genres[-1] %>% aggregate(by=list(all.genres$Group.1), FUN=sum)
 final.count <- all.count[-1] %>% aggregate(by=list(all.count$Group.1), FUN=sum)
@@ -59,14 +40,119 @@ final <- final.genres
 final[-1] <- final[-1]/final.count[-1]
 
 # set rownames
-final_index <- final
-rownames(final_index) <- final_index$Group.1
-final_index <- final_index[-1]
+rownames(final) <- final$Group.1
+final <- final[-1]
 
+genres <- c(
+  'Ambient',
+  'Acoustic Rock',
+  'Alternative R&B',
+  'Art Pop',
+  'Art Rock',
+  'Atmospheric Black Metal',
+  'Avant-Garde Metal',
+  'Baroque Pop',
+  'Black Metal',
+  'Blues Rock',
+  'Breakbeat',
+  'Britpop',
+  'Cloud Rap',
+  'Crust Punk',
+  'Death Metal',
+  'Deep House',
+  'Doom Metal',
+  'Dream Pop',
+  'Drone Metal',
+  'Drone',
+  'Drum and Bass',
+  'Dubstep',
+  'East Coast Hip Hop',
+  'Electro',
+  'Emo',
+  'Experimental Hip Hop',
+  'Folk Metal',
+  'Folk Punk',
+  'Funk',
+  'G-Funk',
+  'Garage Rock',
+  'Glam Metal',
+  'Glam Rock',
+  'Grime',
+  'Grindcore',
+  'Grunge',
+  'Hardcore [EDM]',
+  'Heavy Metal',
+  'Heavy Psych',
+  'House',
+  'IDM',
+  'Indie Folk',
+  'Indie Pop',
+  'Indie Rock',
+  'Industrial',
+  'Instrumental Hip Hop',
+  'Jam Band',
+  'Jazz Rap',
+  'K-Pop',
+  'Krautrock',
+  'Math Rock',
+  'Melodic Death Metal',
+  'Metalcore',
+  'Midwest Emo',
+  'Neofolk',
+  'Neo-Soul',
+  'New Wave',
+  'No Wave',
+  'Noise',
+  'Nu Metal',
+  'Pop Punk',
+  'Pop Rap',
+  'Post-Grunge',
+  'Post-Hardcore',
+  'Post-Punk',
+  'Post-Rock',
+  'Power Metal',
+  'Progressive Rock',
+  'Psychedelic Rock',
+  'Punk Rock',
+  'Rap Metal',
+  'Screamo',
+  'Shoegaze',
+  'Singer/Songwriter',
+  'Ska Punk',
+  'Slowcore',
+  'Soul',
+  'Southern Hip Hop',
+  'Southern Rock',
+  'Surf Rock',
+  'Synthpop',
+  'Techno',
+  'Thrash Metal',
+  'Trance',
+  'Trap [EDM]',
+  'Trap Rap',
+  'Trip Hop',
+  'UK Garage',
+  'UK Hip Hop',
+  'Vaporwave',
+  'Witch House')
+
+# Pare down to only important genres
+final <- final[genres,]
+  
 # create clusters
-dend <- as.dendrogram(hclust(dist(final_index, method = 'euclidean'), method = 'ward.D'))
+dend <- as.dendrogram(hclust(dist(final, method = 'euclidean'), method = 'ward.D'))
 
 # visualize dendrogram
-dend %>% set('branches_k_color', k=4) %>% plot(horiz=T, xlab='Distance')
+dend %>% set('branches_k_color', k=6) %>% plot(horiz=F, xlab='Distance')
 
-(dend %>% cut(h=30))$lower[[1]] %>% set('branches_k_color', value=c('red', 'red3', 'rosybrown1', 'red4', 'salmon'), k=5) %>% plot(horiz=F)
+(dend %>% cut(h=6))$lower[[1]] %>% set('branches_k_color', value=c('red', 'red4', 'lightpink'), k=3) %>% plot(horiz=F)
+
+(dend %>% cut(h=6))$lower[[2]] %>% set('branches_k_color', value=c('yellow3', 'yellow4', 'khaki'), k=3) %>% plot(horiz=F)
+
+(dend %>% cut(h=6))$lower[[3]] %>% set('branches_k_color', value=c('chartreuse3', 'forestgreen', 'darkolivegreen3'), k=3) %>% plot(horiz=F)
+
+(dend %>% cut(h=6))$lower[[4]] %>% set('branches_k_color', value=c('seagreen2', 'seagreen4', 'darkseagreen2'), k=3) %>% plot(horiz=F)
+
+(dend %>% cut(h=6))$lower[[5]] %>% set('branches_k_color', value=c('royalblue1', 'royalblue4', 'paleturquoise3'), k=3) %>% plot(horiz=F)
+
+(dend %>% cut(h=6))$lower[[6]] %>% set('branches_k_color', value=c('orchid4', 'slateblue4', 'thistle3'), k=3) %>% plot(horiz=F)
