@@ -143,16 +143,16 @@ final <- final[genres,]
 dend <- as.dendrogram(hclust(dist(final, method = 'euclidean'), method = 'ward.D'))
 
 # visualize dendrogram
-dend %>% set('branches_k_color', k=6) %>% plot(horiz=F, xlab='Distance')
+par(mar=c(1, 4, 1, 9), cex = .5)
+dend %>% set('branches_k_color', k=5)  %>% plot(horiz=T, xlab='', axes = F)
 
-(dend %>% cut(h=6))$lower[[1]] %>% set('branches_k_color', value=c('red', 'red4', 'lightpink'), k=3) %>% plot(horiz=F)
+par(mar=c(1, 4, 1, 10), cex = .8)
+(dend %>% cut(h=7))$lower[[1]] %>% set('branches_k_color', value=c('red', 'red4', 'lightpink'), k=3) %>% set('branches_lwd', 2) %>% plot(horiz=T, axes = F)
 
-(dend %>% cut(h=6))$lower[[2]] %>% set('branches_k_color', value=c('yellow3', 'yellow4', 'khaki'), k=3) %>% plot(horiz=F)
+(dend %>% cut(h=7))$lower[[2]] %>% set('branches_k_color', value=c('yellow3', 'yellow4', 'khaki'), k=3) %>% set('branches_lwd', 2) %>% plot(horiz=T, axes = F)
 
-(dend %>% cut(h=6))$lower[[3]] %>% set('branches_k_color', value=c('chartreuse3', 'forestgreen', 'darkolivegreen3'), k=3) %>% plot(horiz=F)
+(dend %>% cut(h=7))$lower[[3]] %>% set('branches_k_color', value=c('seagreen2', 'seagreen4', 'darkseagreen2'), k=3) %>% set('branches_lwd', 2) %>% plot(horiz=T, axes = F)
 
-(dend %>% cut(h=6))$lower[[4]] %>% set('branches_k_color', value=c('seagreen2', 'seagreen4', 'darkseagreen2'), k=3) %>% plot(horiz=F)
+(dend %>% cut(h=7))$lower[[4]] %>% set('branches_k_color', value=c('royalblue1', 'royalblue4', 'paleturquoise3'), k=3)  %>% set('branches_lwd', 2) %>% plot(horiz=T, axes = F)
 
-(dend %>% cut(h=6))$lower[[5]] %>% set('branches_k_color', value=c('royalblue1', 'royalblue4', 'paleturquoise3'), k=3) %>% plot(horiz=F)
-
-(dend %>% cut(h=6))$lower[[6]] %>% set('branches_k_color', value=c('orchid4', 'slateblue4', 'thistle3'), k=3) %>% plot(horiz=F)
+(dend %>% cut(h=7))$lower[[5]] %>% set('branches_k_color', value=c('orchid4', 'slateblue4', 'thistle3', 'darkorchid4'), k=4) %>% set('branches_lwd', 2) %>% plot(horiz=T, axes = F)
