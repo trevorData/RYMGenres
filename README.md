@@ -35,7 +35,7 @@ Similarily, because the algorithm uses no concept of "influence", genres that ma
 
 ##### Bonus: What if we ran the same analysis using only the descriptors that describe lyrical content and themes?
  
-#####[Plot](https://imgur.com/kVUShaN.jpg)
+##### [Plot](https://imgur.com/kVUShaN.jpg)
 
 ---
 
