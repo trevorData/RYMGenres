@@ -47,5 +47,3 @@ Analysis and visualization done in R using the packages:
 dplyr  
 tm  
 dendextend
-
-View my code [here](https://github.com/trevorData/RYMGenres)
