@@ -1,3 +1,11 @@
+# [Main Plot](https://imgur.com/7VikfHq.jpg)
+
+#### [Red Branch](https://imgur.com/NE7DiMf.jpg), [Yellow Branch](https://imgur.com/ehq1Tbb.jpg), [Green Branch](https://imgur.com/8jXn7IV.jpg), [Blue Branch](https://imgur.com/I86liCs.jpg), [Purple Branch](https://imgur.com/4dJJkGr.jpg)
+
+---
+
+### Using Machine Learning to Create a Music Genre Family Tree
+
 Music fans are generally aware of the idea of a [music genre genealogy tree](https://en.wikipedia.org/wiki/Genealogy_of_musical_genres), with parent genres sprouting branches made up of the genres that they influenced. For example, a branch might go Blues -> Rock & Roll -> Hard Rock -> Metal and so on.
 
 But while the general shape of such tree might be agreed upon by listeners, the specifics could be up for debate. This is because music genres don't literally "evolve" the way animals do; artists may be influenced by one another, but ultimately they write their songs independently. Because of this, any proposed "genealogy" will be somewhat arbitrary.
@@ -19,9 +27,6 @@ Genres that were often described the same way would end up near each other in th
 ---
 
 # Findings:
-
-# [Main Plot](https://imgur.com/7VikfHq.jpg)
-#### [Red Branch](https://imgur.com/NE7DiMf.jpg), [Yellow Branch](https://imgur.com/ehq1Tbb.jpg), [Green Branch](https://imgur.com/8jXn7IV.jpg), [Blue Branch](https://imgur.com/I86liCs.jpg), [Purple Branch](https://imgur.com/4dJJkGr.jpg)
 
 The similarity of two genres is indicated on the tree by where their branches split apart. Indie-Rock and Art-Rock were very similar, so they dont split off until the end of the tree. Techno and Indie-Rock were very dissimillar, so their respective branches split off right at the beginning of the tree.
 
